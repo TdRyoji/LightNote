@@ -136,9 +136,6 @@
   <data name="fontcolor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fontcolor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="i_close" xml:space="preserve">
-    <value />
-  </data>
   <data name="lines_centered" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lines_centered.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

@@ -10,7 +10,7 @@ namespace LightNote
         {
             this.panel.Height = this.ClientSize.Height;
             this.panel.Width = this.ClientSize.Width;
-            this.tab.Height = this.panel.Height - 60;
+            this.tab.Height = this.panel.Height - 56;
             this.tab.Width = this.panel.Width;
         }
 
