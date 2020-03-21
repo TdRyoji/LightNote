@@ -6,7 +6,22 @@ using System.Windows.Forms;
 
 namespace LightNote
 {
-    static class Program
+    class TextPage : TabPage
+    {
+        public RichTextBox Note { get; set; }
+
+        public TextPage()
+        {
+            this.Note = new RichTextBox();
+            this.Note.Multiline = true;
+            this.Note.AcceptsTab = true;
+            this.Note.WordWrap = false;
+            this.Note.Dock = DockStyle.Fill;
+            this.Note.Parent = this;
+        }
+    }
+
+    partial class LightNote : Form
     {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
@@ -14,9 +29,25 @@ namespace LightNote
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new LightNote());
+        }
+
+        private FlowLayoutPanel panel = new FlowLayoutPanel();
+        private TabControl tab = new TabControl();
+        private List<TextPage> pages = new List<TextPage>();
+        private int max_index = -1;
+
+        public LightNote()
+        {
+            this.SetDesktopBounds(100, 50, 450, 400);
+            this.Text = "Light Note";
+
+            this.setSize();
+            this.createPage();
+
+            panel.Parent = this;
+            panel.FlowDirection = FlowDirection.TopDown;
+            panel.Controls.Add(this.tab);
         }
     }
 }
