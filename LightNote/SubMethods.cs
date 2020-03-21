@@ -24,5 +24,21 @@ namespace LightNote
             this.tab.Controls.Add(_page);
             this.tab.SelectedIndex = this.max_index;
         }
+
+        public TextPage SelectedPage()
+        {
+            return this.tab.SelectedTab as TextPage;
+        }
+
+        #region Edit
+        private void undo()
+        {
+            this.SelectedPage().Note.Undo();
+        }
+        private void redo()
+        {
+            this.SelectedPage().Note.Redo();
+        }
+        #endregion
     }
 }
