@@ -48,6 +48,11 @@ namespace LightNote
             panel.Parent = this;
             panel.FlowDirection = FlowDirection.TopDown;
             panel.Controls.Add(this.tab);
+
+            this.SizeChanged += (object sender, EventArgs e) =>
+            {
+                this.setSize();
+            };
         }
     }
 }
