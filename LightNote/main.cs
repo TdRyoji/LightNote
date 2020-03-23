@@ -8,6 +8,7 @@ namespace LightNote
     class TextPage : TabPage
     {
         public RichTextBox Note { get; set; }
+        public string FullPath { get; set; }
 
         public TextPage()
         {
@@ -17,6 +18,8 @@ namespace LightNote
             this.Note.WordWrap = false;
             this.Note.Dock = DockStyle.Fill;
             this.Note.Parent = this;
+
+            this.FullPath = null;
         }
     }
 
@@ -162,15 +165,15 @@ namespace LightNote
             };
             m_save.Click += (object sender, EventArgs e) =>
             {
-
+                this.save(this.SelectedPage());
             };
             m_saveAs.Click += (object sender, EventArgs e) =>
             {
-
+                this.saveAs(this.SelectedPage());
             };
             m_saveAll.Click += (object sender, EventArgs e) =>
             {
-
+                this.saveAll();
             };
             m_exit.Click += (object sender, EventArgs e) =>
             {
@@ -333,12 +336,12 @@ namespace LightNote
             b_save.ToolTipText = "保存 (Ctrl+S)";
             b_save.Click += (object sender, EventArgs e) =>
             {
-
+                this.save(this.SelectedPage());
             };
             b_saveAll.ToolTipText = "全て保存 (Ctrl+L)";
             b_saveAll.Click += (object sender, EventArgs e) =>
             {
-
+                this.saveAll();
             };
             b_print.ToolTipText = "印刷 (Ctrl+P)";
             b_print.Click += (object sender, EventArgs e) =>

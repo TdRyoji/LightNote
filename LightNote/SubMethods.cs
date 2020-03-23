@@ -50,6 +50,46 @@ namespace LightNote
                 }
 
                 _page.Text = Path.GetFileNameWithoutExtension(_open.FileName);
+                _page.FullPath = Path.GetFullPath(_open.FileName);
+            }
+        }
+
+        private void saveAs(TextPage _page)
+        {
+            var _save = new SaveFileDialog();
+
+            _save.FileName = _page.Text;
+            _save.Filter = "テキストファイル | *.txt";
+            _save.Title = _page.Text + "を保存";
+
+            if(_save.ShowDialog() == DialogResult.OK)
+            {
+                using (var _writer = new StreamWriter(_save.FileName))
+                {
+                    _writer.WriteLine(_page.Note.Text);
+                }
+            }
+
+            _page.Text = Path.GetFileNameWithoutExtension(_save.FileName);
+            _page.FullPath = Path.GetFullPath(_save.FileName);
+        }
+
+        private void save(TextPage _page)
+        {
+            if(_page.FullPath == null)
+            {
+                this.saveAs(_page);
+                return;
+            }
+
+            File.WriteAllText(_page.FullPath, _page.Note.Text);
+        }
+
+        private void saveAll()
+        {
+            foreach(var p in this.pages)
+            {
+                this.save(p);
             }
         }
         #endregion
