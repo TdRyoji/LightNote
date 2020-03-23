@@ -57,7 +57,25 @@ namespace LightNote
             _page.Note.SelectAll();
             SendKeys.Send("\b");
         }
+        #endregion
 
+        #region Option
+        private void font()
+        {
+            var _page = this.SelectedPage();
+            var _font = new FontDialog();
+            _font.ShowDialog();
+
+            _page.Note.SelectionFont = _font.Font;
+        }
+        private void fontcolor()
+        {
+            var _page = this.SelectedPage();
+            var _col = new ColorDialog();
+            _col.ShowDialog();
+
+            _page.Note.SelectionColor = _col.Color;
+        }
         #endregion
     }
 }
