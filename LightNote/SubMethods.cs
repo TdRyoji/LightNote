@@ -39,6 +39,25 @@ namespace LightNote
         {
             this.SelectedPage().Note.Redo();
         }
+        private void cut()
+        {
+            this.SelectedPage().Note.Cut();
+        }
+        private void copy()
+        {
+            this.SelectedPage().Note.Copy();
+        }
+        private void paste()
+        {
+            this.SelectedPage().Note.Paste();
+        }
+        private void delete()
+        {
+            var _page = this.SelectedPage();
+            _page.Note.SelectAll();
+            SendKeys.Send("\b");
+        }
+
         #endregion
     }
 }

@@ -214,19 +214,19 @@ namespace LightNote
             };
             m_cut.Click += (object sender, EventArgs e) =>
             {
-
+                this.cut();
             };
             m_copy.Click += (object sender, EventArgs e) =>
             {
-
+                this.copy();
             };
             m_paste.Click += (object sender, EventArgs e) =>
             {
-
+                this.paste();
             };
             m_delete.Click += (object sender, EventArgs e) =>
             {
-
+                this.delete();
             };
             #endregion
             #endregion
@@ -363,22 +363,22 @@ namespace LightNote
             b_cut.ToolTipText = "切り取り (Ctrl+X)";
             b_cut.Click += (object sender, EventArgs e) =>
             {
-
+                this.cut();
             };
             b_copy.ToolTipText = "コピー (Ctrl+C)";
             b_copy.Click += (object sender, EventArgs e) =>
             {
-
+                this.copy();
             };
             b_paste.ToolTipText = "貼り付け (Ctrl+V)";
             b_paste.Click += (object sender, EventArgs e) =>
             {
-
+                this.paste();
             };
             b_delete.ToolTipText = "削除 (Del)";
             b_delete.Click += (object sender, EventArgs e) =>
             {
-
+                this.delete();
             };
             b_font.ToolTipText = "フォント (Ctrl+F1)";
             b_font.Click += (object sender, EventArgs e) =>
