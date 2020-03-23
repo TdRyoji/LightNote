@@ -95,7 +95,7 @@ namespace LightNote
 
         private bool closeDialog(TextPage _page)
         {
-            switch(MessageBox.Show("保存しますか？", "保存",
+            switch(MessageBox.Show("保存しますか？", _page.Text + "の保存",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
             {
                 case DialogResult.Yes:
@@ -110,18 +110,30 @@ namespace LightNote
         private void deletePage()
         {
             var _page = this.SelectedPage();
+            int _index = this.tab.SelectedIndex;
             if(this.closeDialog(_page))
             {
-                this.tab.Controls.RemoveAt(this.max_index);
-                this.pages.RemoveAt(this.max_index);
+                this.tab.Controls.RemoveAt(_index);
+                this.pages.RemoveAt(_index);
                 this.max_index--;
                 _page.Dispose();
+                this.tab.SelectedIndex = (_index == 0 ? _index : _index - 1);
             }
         }
         private void closeonly()
         {
-            if (this.tab.TabCount == 1) this.Close();
+            if (this.max_index == 0) this.Close();
             else this.deletePage();
+        }
+        private void closeNew()
+        {
+            this.deletePage();
+            this.createPage();
+        }
+        private void closeOpen()
+        {
+            this.deletePage();
+            this.open();
         }
         #endregion
 

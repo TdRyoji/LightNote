@@ -146,8 +146,8 @@ namespace LightNote
             m_new.Click += (object sender, EventArgs e) => this.createPage();
             m_open.Click += (object sender, EventArgs e) => this.open();
             m_close.Click += (object sender, EventArgs e) => this.closeonly();
-            m_closeNew.Click += (object sender, EventArgs e) => { };
-            m_closeOpen.Click += (object sender, EventArgs e) => { };
+            m_closeNew.Click += (object sender, EventArgs e) => this.closeNew();
+            m_closeOpen.Click += (object sender, EventArgs e) => this.closeOpen();
             m_save.Click += (object sender, EventArgs e) => this.save(this.SelectedPage());
             m_saveAs.Click += (object sender, EventArgs e) => this.saveAs(this.SelectedPage());
             m_saveAll.Click += (object sender, EventArgs e) => this.saveAll();
