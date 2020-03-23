@@ -24,5 +24,40 @@ namespace LightNote
             this.tab.Controls.Add(_page);
             this.tab.SelectedIndex = this.max_index;
         }
+
+        public TextPage SelectedPage()
+        {
+            return this.tab.SelectedTab as TextPage;
+        }
+
+        #region Edit
+        private void undo()
+        {
+            this.SelectedPage().Note.Undo();
+        }
+        private void redo()
+        {
+            this.SelectedPage().Note.Redo();
+        }
+        private void cut()
+        {
+            this.SelectedPage().Note.Cut();
+        }
+        private void copy()
+        {
+            this.SelectedPage().Note.Copy();
+        }
+        private void paste()
+        {
+            this.SelectedPage().Note.Paste();
+        }
+        private void delete()
+        {
+            var _page = this.SelectedPage();
+            _page.Note.SelectAll();
+            SendKeys.Send("\b");
+        }
+
+        #endregion
     }
 }
