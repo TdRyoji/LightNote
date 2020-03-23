@@ -142,7 +142,7 @@ namespace LightNote
 
             m_new.Click += (object sender, EventArgs e) =>
             {
-
+                this.createPage();
             };
             m_open.Click += (object sender, EventArgs e) =>
             {
@@ -323,7 +323,7 @@ namespace LightNote
             b_new.ToolTipText = "新規作成 (Ctrl+N)";
             b_new.Click += (object sender, EventArgs e) =>
             {
-
+                this.createPage();
             };
             b_open.ToolTipText = "開く (Ctrl+O)";
             b_open.Click += (object sender, EventArgs e) =>
