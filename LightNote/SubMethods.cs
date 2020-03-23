@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LightNote
@@ -14,6 +16,11 @@ namespace LightNote
             this.tab.Width = this.panel.Width;
         }
 
+        public TextPage SelectedPage()
+        {
+            return this.tab.SelectedTab as TextPage;
+        }
+
         private void createPage()
         {
             this.max_index++;
@@ -25,10 +32,27 @@ namespace LightNote
             this.tab.SelectedIndex = this.max_index;
         }
 
-        public TextPage SelectedPage()
+        #region File
+        private void open()
         {
-            return this.tab.SelectedTab as TextPage;
+            var _open = new OpenFileDialog();
+            _open.Filter = "テキストファイル | *.txt";
+
+            if(_open.ShowDialog() == DialogResult.OK)
+            {
+                this.createPage();
+                var _page = this.SelectedPage();
+
+                using (var _reader =
+                    new StreamReader(_open.FileName, Encoding.Default))
+                {
+                    _page.Note.Text = _reader.ReadToEnd();
+                }
+
+                _page.Text = Path.GetFileNameWithoutExtension(_open.FileName);
+            }
         }
+        #endregion
 
         #region Edit
         private void undo()

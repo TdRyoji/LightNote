@@ -146,7 +146,7 @@ namespace LightNote
             };
             m_open.Click += (object sender, EventArgs e) =>
             {
-
+                this.open();
             };
             m_close.Click += (object sender, EventArgs e) =>
             {
@@ -328,7 +328,7 @@ namespace LightNote
             b_open.ToolTipText = "開く (Ctrl+O)";
             b_open.Click += (object sender, EventArgs e) =>
             {
-
+                this.open();
             };
             b_save.ToolTipText = "保存 (Ctrl+S)";
             b_save.Click += (object sender, EventArgs e) =>
