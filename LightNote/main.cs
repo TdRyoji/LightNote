@@ -143,42 +143,15 @@ namespace LightNote
             m_saveAll.ShortcutKeys = Keys.Control | Keys.L;
             m_exit.ShortcutKeys = Keys.Alt | Keys.X;
 
-            m_new.Click += (object sender, EventArgs e) =>
-            {
-                this.createPage();
-            };
-            m_open.Click += (object sender, EventArgs e) =>
-            {
-                this.open();
-            };
-            m_close.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_closeNew.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_closeOpen.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_save.Click += (object sender, EventArgs e) =>
-            {
-                this.save(this.SelectedPage());
-            };
-            m_saveAs.Click += (object sender, EventArgs e) =>
-            {
-                this.saveAs(this.SelectedPage());
-            };
-            m_saveAll.Click += (object sender, EventArgs e) =>
-            {
-                this.saveAll();
-            };
-            m_exit.Click += (object sender, EventArgs e) =>
-            {
-
-            };
+            m_new.Click += (object sender, EventArgs e) => this.createPage();
+            m_open.Click += (object sender, EventArgs e) => this.open();
+            m_close.Click += (object sender, EventArgs e) => this.closeonly();
+            m_closeNew.Click += (object sender, EventArgs e) => { };
+            m_closeOpen.Click += (object sender, EventArgs e) => { };
+            m_save.Click += (object sender, EventArgs e) => this.save(this.SelectedPage());
+            m_saveAs.Click += (object sender, EventArgs e) => this.saveAs(this.SelectedPage());
+            m_saveAll.Click += (object sender, EventArgs e) => this.saveAll();
+            m_exit.Click += (object sender, EventArgs e) => this.Close();
             #endregion
             #endregion
 
@@ -207,30 +180,12 @@ namespace LightNote
             m_paste.ShortcutKeys = Keys.Control | Keys.V;
             m_delete.ShortcutKeys = Keys.Delete;
 
-            m_undo.Click += (object sender, EventArgs e) =>
-            {
-                this.undo();
-            };
-            m_redo.Click += (object sender, EventArgs e) =>
-            {
-                this.redo();
-            };
-            m_cut.Click += (object sender, EventArgs e) =>
-            {
-                this.cut();
-            };
-            m_copy.Click += (object sender, EventArgs e) =>
-            {
-                this.copy();
-            };
-            m_paste.Click += (object sender, EventArgs e) =>
-            {
-                this.paste();
-            };
-            m_delete.Click += (object sender, EventArgs e) =>
-            {
-                this.delete();
-            };
+            m_undo.Click += (object sender, EventArgs e) => this.undo();
+            m_redo.Click += (object sender, EventArgs e) => this.redo();
+            m_cut.Click += (object sender, EventArgs e) => this.cut();
+            m_copy.Click += (object sender, EventArgs e) => this.copy();
+            m_paste.Click += (object sender, EventArgs e) => this.paste();
+            m_delete.Click += (object sender, EventArgs e) => this.delete();
             #endregion
             #endregion
 
@@ -324,35 +279,23 @@ namespace LightNote
             #endregion
             #region Text and Events
             b_new.ToolTipText = "新規作成 (Ctrl+N)";
-            b_new.Click += (object sender, EventArgs e) =>
-            {
-                this.createPage();
-            };
+            b_new.Click += (object sender, EventArgs e) => this.createPage();
+
             b_open.ToolTipText = "開く (Ctrl+O)";
-            b_open.Click += (object sender, EventArgs e) =>
-            {
-                this.open();
-            };
+            b_open.Click += (object sender, EventArgs e) => this.open();
+
             b_save.ToolTipText = "保存 (Ctrl+S)";
-            b_save.Click += (object sender, EventArgs e) =>
-            {
-                this.save(this.SelectedPage());
-            };
+            b_save.Click += (object sender, EventArgs e) => this.save(this.SelectedPage());
+
             b_saveAll.ToolTipText = "全て保存 (Ctrl+L)";
-            b_saveAll.Click += (object sender, EventArgs e) =>
-            {
-                this.saveAll();
-            };
+            b_saveAll.Click += (object sender, EventArgs e) => this.saveAll();
+
             b_print.ToolTipText = "印刷 (Ctrl+P)";
-            b_print.Click += (object sender, EventArgs e) =>
-            {
+            b_print.Click += (object sender, EventArgs e) => { };
 
-            };
             b_close.ToolTipText = "閉じる(Alt+C)";
-            b_close.Click += (object sender, EventArgs e) =>
-            {
+            b_close.Click += (object sender, EventArgs e) => this.closeonly();
 
-            };
             b_undo.ToolTipText = "元に戻す (Ctrl+Z)";
             b_undo.Click += (object sender, EventArgs e) =>
             {
@@ -412,10 +355,7 @@ namespace LightNote
             #endregion
 
             #region Event
-            this.SizeChanged += (object sender, EventArgs e) =>
-            {
-                this.setSize();
-            };
+            this.SizeChanged += (object sender, EventArgs e) => this.setSize();
             #endregion
         }
     }

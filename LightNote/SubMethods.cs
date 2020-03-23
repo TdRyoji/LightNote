@@ -92,6 +92,37 @@ namespace LightNote
                 this.save(p);
             }
         }
+
+        private bool closeDialog(TextPage _page)
+        {
+            switch(MessageBox.Show("保存しますか？", "保存",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            {
+                case DialogResult.Yes:
+                    this.save(_page);
+                    return true;
+                case DialogResult.No:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        private void deletePage()
+        {
+            var _page = this.SelectedPage();
+            if(this.closeDialog(_page))
+            {
+                this.tab.Controls.RemoveAt(this.max_index);
+                this.pages.RemoveAt(this.max_index);
+                this.max_index--;
+                _page.Dispose();
+            }
+        }
+        private void closeonly()
+        {
+            if (this.tab.TabCount == 1) this.Close();
+            else this.deletePage();
+        }
         #endregion
 
         #region Edit
@@ -121,7 +152,6 @@ namespace LightNote
             _page.Note.SelectAll();
             SendKeys.Send("\b");
         }
-
         #endregion
     }
 }
