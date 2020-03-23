@@ -76,6 +76,21 @@ namespace LightNote
 
             _page.Note.SelectionColor = _col.Color;
         }
+        private void just_centered()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Center;
+        }
+        private void just_left()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Left;
+        }
+        private void just_right()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Right;
+        }
         #endregion
     }
 }

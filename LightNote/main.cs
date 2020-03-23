@@ -237,9 +237,9 @@ namespace LightNote
 
             m_font.Click += (object sender, EventArgs e) => this.font();
             m_color.Click += (object sender, EventArgs e) => this.fontcolor();
-            m_justL.Click += (object sender, EventArgs e) => { };
-            m_just.Click += (object sender, EventArgs e) => { };
-            m_justR.Click += (object sender, EventArgs e) => { };
+            m_justL.Click += (object sender, EventArgs e) => this.just_left();
+            m_just.Click += (object sender, EventArgs e) => this.just_centered();
+            m_justR.Click += (object sender, EventArgs e) => this.just_right();
             #endregion
             #endregion
             #endregion
@@ -260,8 +260,8 @@ namespace LightNote
             b_delete = new ToolStripButton(this.i_delete);
             b_font = new ToolStripButton(this.i_font);
             b_color = new ToolStripButton(this.i_color);
-            b_justL = new ToolStripButton(this.i_just);
-            b_just = new ToolStripButton(this.i_justL);
+            b_justL = new ToolStripButton(this.i_justL);
+            b_just = new ToolStripButton(this.i_just);
             b_justR = new ToolStripButton(this.i_justR);
 
             this.tool.Items.Add(b_new);
@@ -342,13 +342,13 @@ namespace LightNote
             b_color.Click += (object sender, EventArgs e) => this.fontcolor();
 
             b_justL.ToolTipText = "左揃え (Ctrl+Shift+L)";
-            b_justL.Click += (object sender, EventArgs e) => { };
+            b_justL.Click += (object sender, EventArgs e) => this.just_left();
 
             b_just.ToolTipText = "中央揃え (Ctrl+Shift+J)";
-            b_just.Click += (object sender, EventArgs e) => { };
+            b_just.Click += (object sender, EventArgs e) => this.just_centered();
 
             b_justR.ToolTipText = "右揃え (Ctrl+Shift+R)";
-            b_justR.Click += (object sender, EventArgs e) => { };
+            b_justR.Click += (object sender, EventArgs e) => this.just_right();
             #endregion
             #endregion
 
