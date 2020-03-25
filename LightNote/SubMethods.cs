@@ -181,5 +181,39 @@ namespace LightNote
             SendKeys.Send("\b");
         }
         #endregion
+
+        #region Option
+        private void font()
+        {
+            var _page = this.SelectedPage();
+            var _font = new FontDialog();
+            _font.ShowDialog();
+
+            _page.Note.SelectionFont = _font.Font;
+        }
+        private void fontcolor()
+        {
+            var _page = this.SelectedPage();
+            var _col = new ColorDialog();
+            _col.ShowDialog();
+
+            _page.Note.SelectionColor = _col.Color;
+        }
+        private void just_centered()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Center;
+        }
+        private void just_left()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Left;
+        }
+        private void just_right()
+        {
+            this.SelectedPage().Note.SelectionAlignment
+                = HorizontalAlignment.Right;
+        }
+        #endregion
     }
 }

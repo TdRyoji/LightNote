@@ -205,32 +205,17 @@ namespace LightNote
             m_option.DropDownItems.Add(m_justR);
             #endregion
             #region ShortcutKeys and Events
-            m_font.ShortcutKeys = Keys.Control | Keys.F1;
-            m_color.ShortcutKeys = Keys.Control | Keys.F2;
+            m_font.ShortcutKeys = Keys.F1;
+            m_color.ShortcutKeys = Keys.F2;
             m_justL.ShortcutKeys = Keys.Control | Keys.Shift | Keys.L;
             m_just.ShortcutKeys = Keys.Control | Keys.Shift | Keys.J;
             m_justR.ShortcutKeys = Keys.Control | Keys.Shift | Keys.R;
 
-            m_font.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_color.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_justL.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_just.Click += (object sender, EventArgs e) =>
-            {
-
-            };
-            m_justR.Click += (object sender, EventArgs e) =>
-            {
-
-            };
+            m_font.Click += (object sender, EventArgs e) => this.font();
+            m_color.Click += (object sender, EventArgs e) => this.fontcolor();
+            m_justL.Click += (object sender, EventArgs e) => this.just_left();
+            m_just.Click += (object sender, EventArgs e) => this.just_centered();
+            m_justR.Click += (object sender, EventArgs e) => this.just_right();
             #endregion
             #endregion
             #endregion
@@ -251,8 +236,8 @@ namespace LightNote
             b_delete = new ToolStripButton(this.i_delete);
             b_font = new ToolStripButton(this.i_font);
             b_color = new ToolStripButton(this.i_color);
-            b_justL = new ToolStripButton(this.i_just);
-            b_just = new ToolStripButton(this.i_justL);
+            b_justL = new ToolStripButton(this.i_justL);
+            b_just = new ToolStripButton(this.i_just);
             b_justR = new ToolStripButton(this.i_justR);
 
             this.tool.Items.Add(b_new);
@@ -297,60 +282,37 @@ namespace LightNote
             b_close.Click += (object sender, EventArgs e) => this.closeonly();
 
             b_undo.ToolTipText = "元に戻す (Ctrl+Z)";
-            b_undo.Click += (object sender, EventArgs e) =>
-            {
-                this.undo();
-            };
+            b_undo.Click += (object sender, EventArgs e) => this.undo();
+
             b_redo.ToolTipText = "やり直し (Ctrl+Y)";
-            b_redo.Click += (object sender, EventArgs e) =>
-            {
-                this.redo();
-            };
+            b_redo.Click += (object sender, EventArgs e) => this.redo();
+
             b_cut.ToolTipText = "切り取り (Ctrl+X)";
-            b_cut.Click += (object sender, EventArgs e) =>
-            {
-                this.cut();
-            };
+            b_cut.Click += (object sender, EventArgs e) => this.cut();
+
             b_copy.ToolTipText = "コピー (Ctrl+C)";
-            b_copy.Click += (object sender, EventArgs e) =>
-            {
-                this.copy();
-            };
+            b_copy.Click += (object sender, EventArgs e) => this.copy();
+
             b_paste.ToolTipText = "貼り付け (Ctrl+V)";
-            b_paste.Click += (object sender, EventArgs e) =>
-            {
-                this.paste();
-            };
+            b_paste.Click += (object sender, EventArgs e) => this.paste();
+
             b_delete.ToolTipText = "削除 (Del)";
-            b_delete.Click += (object sender, EventArgs e) =>
-            {
-                this.delete();
-            };
+            b_delete.Click += (object sender, EventArgs e) => this.delete();
+            
             b_font.ToolTipText = "フォント (Ctrl+F1)";
-            b_font.Click += (object sender, EventArgs e) =>
-            {
-
-            };
+            b_font.Click += (object sender, EventArgs e) => this.font();
+            
             b_color.ToolTipText = "カラー (Ctrl+F2)";
-            b_color.Click += (object sender, EventArgs e) =>
-            {
+            b_color.Click += (object sender, EventArgs e) => this.fontcolor();
 
-            };
             b_justL.ToolTipText = "左揃え (Ctrl+Shift+L)";
-            b_justL.Click += (object sender, EventArgs e) =>
-            {
+            b_justL.Click += (object sender, EventArgs e) => this.just_left();
 
-            };
             b_just.ToolTipText = "中央揃え (Ctrl+Shift+J)";
-            b_just.Click += (object sender, EventArgs e) =>
-            {
+            b_just.Click += (object sender, EventArgs e) => this.just_centered();
 
-            };
             b_justR.ToolTipText = "右揃え (Ctrl+Shift+R)";
-            b_justR.Click += (object sender, EventArgs e) =>
-            {
-
-            };
+            b_justR.Click += (object sender, EventArgs e) => this.just_right();
             #endregion
             #endregion
 
