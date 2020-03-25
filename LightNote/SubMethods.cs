@@ -135,6 +135,22 @@ namespace LightNote
             this.deletePage();
             this.open();
         }
+
+        private void formClosing(object sender, FormClosingEventArgs e)
+        {
+            switch(MessageBox.Show("編集中のファイルを保存せずに終了しますか？", "確認",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            {
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+                case DialogResult.No:
+                    this.saveAll();
+                    break;
+                default:
+                    break;
+            }
+        }
         #endregion
 
         #region Edit

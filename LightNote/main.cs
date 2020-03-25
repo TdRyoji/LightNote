@@ -356,7 +356,9 @@ namespace LightNote
 
             #region Event
             this.SizeChanged += (object sender, EventArgs e) => this.setSize();
+            this.FormClosing += formClosing;
             #endregion
         }
+        
     }
 }
