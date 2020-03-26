@@ -36,17 +36,34 @@ namespace LightNote
         private void open()
         {
             var _open = new OpenFileDialog();
-            _open.Filter = "テキストファイル | *.txt";
+            _open.Filter = "テキストファイル | *.txt|リッチテキストドキュメント| *.rtf";
 
             if(_open.ShowDialog() == DialogResult.OK)
             {
                 this.createPage();
                 var _page = this.SelectedPage();
 
-                using (var _reader =
-                    new StreamReader(_open.FileName, Encoding.Default))
+                switch(_open.FilterIndex)
                 {
-                    _page.Note.Text = _reader.ReadToEnd();
+                    case 1:
+                        using (var _reader =
+                            new StreamReader(_open.FileName, Encoding.Default))
+                        {
+                            _page.Note.Text = _reader.ReadToEnd();
+                        }
+                        break;
+                    case 2:
+                        try
+                        {
+                            _page.Note.LoadFile(_open.FileName, RichTextBoxStreamType.RichText);
+                        }
+                        catch(Exception e)
+                        {
+                            MessageBox.Show(e.Message, "問題が発生しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    default: break;
                 }
 
                 _page.Text = Path.GetFileNameWithoutExtension(_open.FileName);
@@ -59,14 +76,24 @@ namespace LightNote
             var _save = new SaveFileDialog();
 
             _save.FileName = _page.Text;
-            _save.Filter = "テキストファイル | *.txt";
+            _save.Filter = "テキストファイル | *.txt|リッチテキストドキュメント| *.rtf";
             _save.Title = _page.Text + "を保存";
 
             if(_save.ShowDialog() == DialogResult.OK)
             {
-                using (var _writer = new StreamWriter(_save.FileName))
+                switch (_save.FilterIndex)
                 {
-                    _writer.WriteLine(_page.Note.Text);
+                    case 1:
+                        using (var _writer = new StreamWriter(_save.FileName))
+                        {
+                            _writer.WriteLine(_page.Note.Text);
+                        }
+                        break;
+                    case 2:
+                        _page.Note.SaveFile(_save.FileName, RichTextBoxStreamType.RichText);
+                        break;
+                    default:
+                        return;
                 }
             }
 
