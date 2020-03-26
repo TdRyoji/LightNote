@@ -37,37 +37,41 @@ namespace LightNote
         {
             var _open = new OpenFileDialog();
             _open.Filter = "テキストファイル | *.txt|リッチテキストドキュメント| *.rtf";
+            _open.Multiselect = true;
 
             if(_open.ShowDialog() == DialogResult.OK)
             {
-                this.createPage();
-                var _page = this.SelectedPage();
-
-                switch(_open.FilterIndex)
+                foreach(var _fn in _open.FileNames)
                 {
-                    case 1:
-                        using (var _reader =
-                            new StreamReader(_open.FileName, Encoding.Default))
-                        {
-                            _page.Note.Text = _reader.ReadToEnd();
-                        }
-                        break;
-                    case 2:
-                        try
-                        {
-                            _page.Note.LoadFile(_open.FileName, RichTextBoxStreamType.RichText);
-                        }
-                        catch(Exception e)
-                        {
-                            MessageBox.Show(e.Message, "問題が発生しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    default: break;
-                }
+                    this.createPage();
+                    var _page = this.SelectedPage();
 
-                _page.Text = Path.GetFileNameWithoutExtension(_open.FileName);
-                _page.FullPath = Path.GetFullPath(_open.FileName);
+                    switch (_open.FilterIndex)
+                    {
+                        case 1:
+                            using (var _reader =
+                                new StreamReader(_fn, Encoding.Default))
+                            {
+                                _page.Note.Text = _reader.ReadToEnd();
+                            }
+                            break;
+                        case 2:
+                            try
+                            {
+                                _page.Note.LoadFile(_fn, RichTextBoxStreamType.RichText);
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message, "問題が発生しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        default: break;
+                    }
+
+                    _page.Text = Path.GetFileNameWithoutExtension(_fn);
+                    _page.FullPath = Path.GetFullPath(_fn);
+                }
             }
         }
 
