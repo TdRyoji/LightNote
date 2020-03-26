@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace LightNote
 {
-    partial class LightNote
+    partial class LightNote : Form
     {
         private void setSize()
         {
@@ -38,40 +38,18 @@ namespace LightNote
             var _open = new OpenFileDialog();
             _open.Filter = "テキストファイル | *.txt|リッチテキストドキュメント| *.rtf";
             _open.Multiselect = true;
-
-            if(_open.ShowDialog() == DialogResult.OK)
+            
+            if (_open.ShowDialog() != DialogResult.OK)
             {
-                foreach(var _fn in _open.FileNames)
-                {
-                    this.createPage();
-                    var _page = this.SelectedPage();
+                if (this.max_index == -1) this.createPage();
+                return;
+            }
 
-                    switch (_open.FilterIndex)
-                    {
-                        case 1:
-                            using (var _reader =
-                                new StreamReader(_fn, Encoding.Default))
-                            {
-                                _page.Note.Text = _reader.ReadToEnd();
-                            }
-                            break;
-                        case 2:
-                            try
-                            {
-                                _page.Note.LoadFile(_fn, RichTextBoxStreamType.RichText);
-                            }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.Message, "問題が発生しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        default: break;
-                    }
-
-                    _page.Text = Path.GetFileNameWithoutExtension(_fn);
-                    _page.FullPath = Path.GetFullPath(_fn);
-                }
+            foreach (var _fn in _open.FileNames)
+            {
+                this.createPage();
+                var _page = this.SelectedPage();
+                _page.Load(_fn, _open.FilterIndex == 2);
             }
         }
 
@@ -85,35 +63,16 @@ namespace LightNote
 
             if(_save.ShowDialog() == DialogResult.OK)
             {
-                switch (_save.FilterIndex)
-                {
-                    case 1:
-                        using (var _writer = new StreamWriter(_save.FileName))
-                        {
-                            _writer.WriteLine(_page.Note.Text);
-                        }
-                        break;
-                    case 2:
-                        _page.Note.SaveFile(_save.FileName, RichTextBoxStreamType.RichText);
-                        break;
-                    default:
-                        return;
-                }
+                _page.SaveAs(_save.FileName, _save.FilterIndex == 2);
             }
-
-            _page.Text = Path.GetFileNameWithoutExtension(_save.FileName);
-            _page.FullPath = Path.GetFullPath(_save.FileName);
         }
 
         private void save(TextPage _page)
         {
-            if(_page.FullPath == null)
-            {
+            if (_page.FullPath == null)
                 this.saveAs(_page);
-                return;
-            }
-
-            File.WriteAllText(_page.FullPath, _page.Note.Text);
+            else
+                _page.Save();
         }
 
         private void saveAll()

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LightNote
 {
     class TextPage : TabPage
     {
         public RichTextBox Note { get; set; }
-        public string FullPath { get; set; }
+        public string FullPath { get; private set; }
+        private bool isRtf;
 
         public TextPage()
         {
@@ -20,6 +23,61 @@ namespace LightNote
             this.Note.Parent = this;
 
             this.FullPath = null;
+            this.isRtf = true;
+        }
+
+        public void Load(string _filename, bool _isRtf)
+        {
+            if(this.isRtf = _isRtf)
+            {
+                try
+                {
+                    this.Note.LoadFile(_filename, RichTextBoxStreamType.RichText);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "問題が発生しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                using (var _reader = new StreamReader(_filename, Encoding.Default))
+                {
+                    this.Note.Text = _reader.ReadToEnd();
+                }
+            }
+
+            this.Text = Path.GetFileNameWithoutExtension(_filename);
+            this.FullPath = Path.GetFullPath(_filename);
+        }
+
+        public void SaveAs(string _filename, bool _isRtf)
+        {
+            if(this.isRtf = _isRtf)
+            {
+                this.Note.SaveFile(_filename, RichTextBoxStreamType.RichText);
+            }
+            else
+            {
+                using (var _writer = new StreamWriter(_filename))
+                {
+                    _writer.WriteLine(this.Note.Text);
+                }
+            }
+
+            this.Text = Path.GetFileNameWithoutExtension(_filename);
+            this.FullPath = Path.GetFullPath(_filename);
+        }
+
+        public void Save()
+        {
+            if (this.FullPath == null) return;
+
+            if (this.isRtf)
+                this.Note.SaveFile(this.FullPath, RichTextBoxStreamType.RichText);
+            else
+                File.WriteAllText(this.FullPath, this.Note.Text);
         }
     }
 
@@ -205,8 +263,8 @@ namespace LightNote
             m_option.DropDownItems.Add(m_justR);
             #endregion
             #region ShortcutKeys and Events
-            m_font.ShortcutKeys = Keys.F1;
-            m_color.ShortcutKeys = Keys.F2;
+            m_font.ShortcutKeys = Keys.Control | Keys.F1;
+            m_color.ShortcutKeys = Keys.Control | Keys.F2;
             m_justL.ShortcutKeys = Keys.Control | Keys.Shift | Keys.L;
             m_just.ShortcutKeys = Keys.Control | Keys.Shift | Keys.J;
             m_justR.ShortcutKeys = Keys.Control | Keys.Shift | Keys.R;
