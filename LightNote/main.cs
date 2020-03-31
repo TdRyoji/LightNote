@@ -105,7 +105,7 @@ namespace LightNote
             m_font, m_color, m_justL, m_just, m_justR;
         private ToolStrip tool = new ToolStrip();
         private ToolStripButton
-            b_new, b_open, b_save, b_saveAll, b_print, b_close,
+            b_new, b_open, b_save, b_saveAll, b_close,
             b_undo, b_redo, b_cut, b_copy, b_paste, b_delete,
             b_font, b_color, b_justL, b_just, b_justR;
         private Image
@@ -284,7 +284,6 @@ namespace LightNote
             b_open = new ToolStripButton(this.i_open);
             b_save = new ToolStripButton(this.i_save);
             b_saveAll = new ToolStripButton(this.i_saveAll);
-            b_print = new ToolStripButton(this.i_print);
             b_close = new ToolStripButton(this.i_close);
             b_undo = new ToolStripButton(this.i_undo);
             b_redo = new ToolStripButton(this.i_redo);
@@ -302,7 +301,6 @@ namespace LightNote
             this.tool.Items.Add(b_open);
             this.tool.Items.Add(b_save);
             this.tool.Items.Add(b_saveAll);
-            this.tool.Items.Add(b_print);
             this.tool.Items.Add(b_close);
             this.tool.Items.Add(new ToolStripSeparator());
             this.tool.Items.Add(b_undo);
@@ -332,9 +330,6 @@ namespace LightNote
 
             b_saveAll.ToolTipText = "全て保存 (Ctrl+L)";
             b_saveAll.Click += (object sender, EventArgs e) => this.saveAll();
-
-            b_print.ToolTipText = "印刷 (Ctrl+P)";
-            b_print.Click += (object sender, EventArgs e) => { };
 
             b_close.ToolTipText = "閉じる(Alt+C)";
             b_close.Click += (object sender, EventArgs e) => this.closeonly();
